@@ -1,0 +1,111 @@
+
+ brain:
+ascii:        
+
+                         _
+  ,-.      __,---.__   ,',`\
+ / `.`. ,-'         `-/ /   )
+(    `,'             _ \   ;
+ \  _( _           ,'  )/  :
+  \ `-( `-.      ,'   /  /
+    \   \ __`.___/_,-( /_,'
+    `--'`,\_o,(_)o_,',
+ -hrr-  (    /`-'\    )
+           `--:\,m//`--'
+                 `--'
+info:
+Anesthesia Considerations:
+- Induction: Propofol (1.5-2.5 mg/kg IV) for rapid induction and quick recovery.
+- Maintenance: Isoflurane or sevoflurane with oxygen. Consider using dexmedetomidine for its neuroprotective effects.
+- Physiological considerations: Maintain cerebral blood flow and manage intracranial pressure.
+- Monitoring: Continuous EEG monitoring, cerebral oximetry, and intracranial pressure monitoring when applicable.
+- Recovery: Close monitoring in PACU, especially for oxygenation, ventilation, and potential cognitive effects.
+- Special considerations: Use of neuroprotective strategies, careful titration of anesthetics to maintain optimal cerebral perfusion.
+
+Summary Table Row:
+Brain | Propofol (1.5-2.5 mg/kg IV) for induction, isoflurane or sevoflurane with dexmedetomidine for maintenance | Sensitive to changes in cerebral blood flow and intracranial pressure | Close PACU monitoring, continuous EEG and cerebral oximetry, neuroprotective strategies
+
+dragon:        
+ascii:
+      . 
+   .>   )\; `a__
+  (  _ _)/ /-."  ~ ~
+   `( )_ )/
+  <_  <_ 
+  Anesthesia Considerations:
+- Induction: Alfaxalone (12 mg/kg) or propofol (10 mg/kg), similar to protocols for large reptiles.
+- Physiological considerations: Three-chambered heart, temperature-dependent metabolism, periods of anaerobic metabolism.
+- Monitoring: Heart rate, temperature, and oxygen saturation are crucial.
+- Recovery: Monitor in a warmed, quiet environment for up to 24 hours due to potential for prolonged recovery.
+- Special equipment: Heat-resistant monitoring devices and intubation equipment for long neck and potential fire breath.
+
+Summary Table Row:
+Dragon | Alfaxalone (12 mg/kg) or propofol (10 mg/kg) for induction | Three-chambered heart, temperature-dependent metabolism, anaerobic metabolism periods | Monitor in warmed environment for up to 24 hours, use heat-resistant equipment
+
+unicorn:
+ascii:
+  -=t`", /`-.___.
+     (_/, `-._.r="
+     /|/`--,`}
+     \I'  ,//  
+info:
+Anesthesia Considerations:
+- Induction: Combination of ketamine (5 mg/kg) and diazepam (0.2 mg/kg) IV, similar to equine protocols.
+- Maintenance: Inhalant anesthetics (isoflurane or sevoflurane) with oxygen.
+- Monitoring: Magic-resistant equipment for vital signs, especially for monitoring magical metabolism.
+- Recovery: Provide a quiet, dimly lit area. Monitor for any magical side effects.
+- Special considerations: Horn protection during procedures, careful drug dosing due to potential magical interactions.
+
+Summary Table Row:
+Unicorn | Ketamine (5 mg/kg) and diazepam (0.2 mg/kg) IV for induction, isoflurane or sevoflurane for maintenance | Magical metabolism, potential for magical interactions | Quiet recovery area, monitor for magical side effects, use magic-resistant equipment
+ 
+phoenix:
+ascii:
+
+          ///,        ////
+          \  /,      /  >.
+            \  /,   _/  /.
+              \_  /_/   /.
+                \__/_   <    Red
+                /<<< \_\_  Phoenix
+              /,)^>>_._ \
+             (/   \\ /\\\
+                  // ````
+ ======((`=======
+
+      info:
+Anesthesia Considerations:
+- Induction: Propofol (4-6 mg/kg IV) for rapid induction.
+- Maintenance: Isoflurane or sevoflurane with oxygen, using fireproof equipment.
+- Analgesia: Fentanyl (2-4 μg/kg IV) for pain management.
+- Monitoring: Continuous temperature monitoring is crucial. Use heat-resistant equipment.
+- Recovery: Monitor in a fireproof area. Be prepared for potential spontaneous combustion and regeneration.
+- Special considerations: Regeneration-aware drug protocols, temperature management to prevent accidental rebirth.
+
+Summary Table Row:
+Phoenix | Propofol (4-6 mg/kg IV) for induction, isoflurane or sevoflurane for maintenance, fentanyl (2-4 μg/kg IV) for analgesia | High body temperature, potential for spontaneous combustion and regeneration | Fireproof recovery area, continuous temperature monitoring, regeneration-aware protocols
+
+mermaid:
+ascii:
+
+         sSSs
+       _, \_SSSS
+        \\/((`\Ss
+          \/)_|\\S
+            /::|//S
+           |:/ `SS
+        __|/
+      /:::\
+jgs  `'`:/
+info:
+Anesthesia Considerations:
+- Induction: Propofol (2-3 mg/kg IV) or ketamine (4-5 mg/kg IM) for induction.
+- Maintenance: Waterproof delivery system for inhalant anesthetics (isoflurane or sevoflurane).
+- Physiological considerations: Dual-environment support (air and water), unique thermoregulation.
+- Monitoring: Waterproof monitoring equipment for vital signs, especially oxygen saturation.
+- Recovery: Provide a shallow water environment with supplemental oxygen.
+- Special considerations: Scale-friendly positioning, careful electrolyte balance monitoring.
+
+Summary Table Row:
+Mermaid | Propofol (2-3 mg/kg IV) or ketamine (4-5 mg/kg IM) for induction, waterproof delivery of isoflurane or sevoflurane | Dual-environment physiology, unique thermoregulation | Shallow water recovery environment, waterproof monitoring equipment, monitor electrolyte balance
+
