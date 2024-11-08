@@ -33,26 +33,18 @@ body, html {
 #nav-list li {
     padding: 10px;
     cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-#nav-list li:hover {
-    background-color: rgba(255, 255, 255, 0.1);
 }
 
 #content-area {
     flex-grow: 1;
     padding: 20px;
-    overflow-y: auto;
 }
 
 #ascii-container {
     font-family: monospace;
-    white-space: pre;
-    line-height: 1.2;
-    margin-bottom: 20px;
+    white-space: pre-wrap; /* Preserve whitespace */
 }
 
 #info-container {
-    line-height: 1.6;
+    margin-top: 20px;
 }
