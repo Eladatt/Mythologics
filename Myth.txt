@@ -32,6 +32,7 @@ ascii:
   (  _ _)/ /-."  ~ ~
    `( )_ )/
   <_  <_ 
+info:
   Anesthesia Considerations:
 - Induction: Alfaxalone (12 mg/kg) or propofol (10 mg/kg), similar to protocols for large reptiles.
 - Physiological considerations: Three-chambered heart, temperature-dependent metabolism, periods of anaerobic metabolism.
