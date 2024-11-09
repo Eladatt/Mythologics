@@ -4,26 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mythical Creatures Anesthesia Guide</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        nav {
+            margin-bottom: 20px;
+        }
+        button {
+            margin-right: 10px;
+            padding: 5px 10px;
+        }
+        #content {
+            white-space: pre-wrap;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
-    <div id="app-container">
-        <!-- Navigation Panel -->
-        <nav id="side-nav">
-            <h1>Mythical Anesthesia</h1>
-            <ul id="nav-list"></ul>
-        </nav>
+    <h1>Mythical Creatures Anesthesia Guide</h1>
+    <nav id="navigation"></nav>
+    <div id="content"></div>
 
-        <!-- Main Content Area -->
-        <main id="content-area">
-            <div id="ascii-container"></div>
-            <div id="info-container"></div>
-        </main>
-    </div>
-
-    <!-- Include JavaScript Files -->
-    <script src="base.js"></script>
-    <script src="animator.js"></script>
-    <script src="main.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
