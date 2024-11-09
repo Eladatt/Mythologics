@@ -7,30 +7,14 @@ body {
     color: #333;
 }
 
-h1 {
+h1, h2 {
     text-align: center;
     color: #2c3e50;
-    margin-bottom: 30px;
-}
-
-h2 {
-    color: #3498db;
-    border-bottom: 2px solid #3498db;
-    padding-bottom: 10px;
-}
-
-h3 {
-    color: #2980b9;
 }
 
 nav {
-    position: sticky;
-    top: 0;
-    background-color: #f0f0f0;
-    padding: 10px 0;
     margin-bottom: 20px;
     text-align: center;
-    z-index: 1000;
 }
 
 button {
@@ -48,21 +32,89 @@ button:hover {
     background-color: #2980b9;
 }
 
-.creature-section {
+#content {
+    display: flex;
     background-color: white;
-    padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    margin-bottom: 30px;
+    overflow: hidden;
+}
+
+#ascii-frame, #info-frame {
+    padding: 20px;
+    height: 400px;
+}
+
+#ascii-frame {
+    flex: 1;
+    overflow: hidden;
+}
+
+#info-frame {
+    flex: 2;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: pink #f0f0f0;
+}
+
+#info-frame::-webkit-scrollbar {
+    width: 8px;
+}
+
+#info-frame::-webkit-scrollbar-track {
+    background: #f0f0f0;
+}
+
+#info-frame::-webkit-scrollbar-thumb {
+    background-color: pink;
+    border-radius: 4px;
 }
 
 pre {
-    background-color: #ecf0f1;
-    padding: 15px;
-    border-radius: 5px;
-    overflow-x: auto;
+    white-space: pre-wrap;
     font-size: 14px;
     line-height: 1.2;
+}
+
+#summary-button {
+    display: block;
+    margin: 20px auto;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 800px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 table {
@@ -72,8 +124,8 @@ table {
 }
 
 th, td {
-    border: 1px solid #bdc3c7;
-    padding: 12px;
+    border: 1px solid #ddd;
+    padding: 8px;
     text-align: left;
 }
 
@@ -82,18 +134,13 @@ th {
     color: white;
 }
 
-tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-@media (max-width: 600px) {
-    body {
-        padding: 10px;
+@media (max-width: 768px) {
+    #content {
+        flex-direction: column;
     }
     
-    button {
-        display: inline-block;
-        width: auto;
-        margin-bottom: 5px;
+    #ascii-frame, #info-frame {
+        height: auto;
+        max-height: 300px;
     }
 }
