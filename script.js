@@ -5,13 +5,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Simulated file structure (replace with actual file reading logic)
     const files = [
         {
-            name: 'file1.txt',
+            name: 'Myth.txt',
             content: `# Section 1\nContent of section 1\n## Subsection 1.1\nSubsection content\n# Section 2\nContent of section 2\n## Summary\n| Column 1 | Column 2 |\n|----------|----------|\n| Data 1   | Data 2   |`
         },
-        {
-            name: 'file2.txt',
-            content: `# Section A\nContent of section A\n# Section B\nContent of section B\n## Summary\n| Column X | Column Y |\n|----------|----------|\n| Data X   | Data Y   |`
-        }
+        
     ];
 
     // Create sidebar navigation
