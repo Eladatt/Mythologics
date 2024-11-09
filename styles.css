@@ -1,80 +1,106 @@
-body, html {
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    height: 100%;
+}
+
+body {
     font-family: Arial, sans-serif;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+}
+
+header {
+    background-color: #3498db;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 1rem;
 }
 
 nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: #333;
-    padding: 10px;
-    z-index: 1000;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
 button {
-    margin-right: 10px;
-    padding: 5px 10px;
-    background-color: #4CAF50;
+    padding: 0.5rem 1rem;
+    background-color: #2980b9;
     color: white;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-#content {
+button:hover {
+    background-color: #1c638e;
+}
+
+main {
+    flex-grow: 1;
     display: flex;
-    height: calc(100% - 50px);
-    margin-top: 50px;
+    padding: 1rem;
+    gap: 1rem;
+    overflow: hidden;
 }
 
-#asciiFrame, #textFrame {
-    flex: 1;
-    overflow: auto;
-    padding: 20px;
-}
-
-#asciiFrame {
-    background-color: #f0f0f0;
-    font-family: monospace;
-    white-space: pre;
-}
-
-#textFrame {
-    background-color: #ffffff;
-}
-
-#summaryTable {
-    position: fixed;
-    top: 50px;
-    left: 0;
-    right: 0;
-    bottom: 0;
+.ascii-frame, .info-frame {
     background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 1rem;
     overflow: auto;
-    padding: 20px;
+}
+
+.ascii-frame {
+    flex: 1;
+    white-space: pre;
+    font-family: monospace;
+    font-size: 0.8rem;
+}
+
+.info-frame {
+    flex: 2;
+}
+
+footer {
+    background-color: #3498db;
+    padding: 1rem;
+    text-align: center;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
+    margin-top: 1rem;
 }
 
 th, td {
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 0.5rem;
     text-align: left;
 }
 
 th {
-    background-color: #4CAF50;
+    background-color: #3498db;
     color: white;
 }
 
 @media (max-width: 768px) {
-    #content {
+    main {
         flex-direction: column;
+    }
+
+    .ascii-frame, .info-frame {
+        width: 100%;
     }
 }
