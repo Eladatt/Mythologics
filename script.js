@@ -10,23 +10,8 @@ document.addEventListener('DOMContentLoaded', function() {
             createSummaryTable(creatures);
         });
 
-    const summaryButton = document.getElementById('summary-button');
-    const summaryModal = document.getElementById('summary-table');
-    const closeButton = document.getElementsByClassName('close')[0];
-
-    summaryButton.onclick = function() {
-        summaryModal.style.display = "block";
-    }
-
-    closeButton.onclick = function() {
-        summaryModal.style.display = "none";
-    }
-
-    window.onclick = function(event) {
-        if (event.target == summaryModal) {
-            summaryModal.style.display = "none";
-        }
-    }
+    document.getElementById('summary-button').addEventListener('click', showSummaryTable);
+    document.getElementById('close-summary').addEventListener('click', hideSummaryTable);
 });
 
 function parseCreatures(data) {
@@ -57,11 +42,8 @@ function createNavigation(creatures) {
 }
 
 function displayCreature(creature) {
-    const asciiFrame = document.getElementById('ascii-frame');
-    const infoFrame = document.getElementById('info-frame');
-
-    asciiFrame.innerHTML = `<pre>${creature.ascii}</pre>`;
-    infoFrame.innerHTML = `
+    document.getElementById('ascii-art').textContent = creature.ascii;
+    document.getElementById('info-text').innerHTML = `
         <h2>${creature.name}</h2>
         <h3>Anesthesia Considerations:</h3>
         <p>${creature.info}</p>
@@ -69,21 +51,24 @@ function displayCreature(creature) {
 }
 
 function createSummaryTable(creatures) {
-    const table = document.getElementById('summary-table-content');
-    table.innerHTML = `
-        <tr>
-            <th>Creature</th>
-            <th>Anesthesia Protocol</th>
-            <th>Physiological Considerations</th>
-            <th>Special Considerations</th>
-        </tr>
-    `;
-
+    const summaryBody = document.getElementById('summary-body');
     creatures.forEach(creature => {
-        const row = table.insertRow();
-        creature.summary.split('|').forEach(cell => {
-            const td = row.insertCell();
-            td.textContent = cell.trim();
-        });
+        const row = document.createElement('tr');
+        const [name, protocol, physiology, special] = creature.summary.split('|');
+        row.innerHTML = `
+            <td>${name.trim()}</td>
+            <td>${protocol.trim()}</td>
+            <td>${physiology.trim()}</td>
+            <td>${special.trim()}</td>
+        `;
+        summaryBody.appendChild(row);
     });
+}
+
+function showSummaryTable() {
+    document.getElementById('summary-table').classList.remove('hidden');
+}
+
+function hideSummaryTable() {
+    document.getElementById('summary-table').classList.add('hidden');
 }
