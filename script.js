@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             const creatures = parseCreatures(data);
             createNavigation(creatures);
-            displayCreature(creatures[0]);
+            displayAllCreatures(creatures);
         });
 });
 
@@ -30,29 +30,37 @@ function createNavigation(creatures) {
     creatures.forEach(creature => {
         const button = document.createElement('button');
         button.textContent = creature.name;
-        button.addEventListener('click', () => displayCreature(creature));
+        button.addEventListener('click', () => {
+            document.getElementById(creature.name).scrollIntoView({behavior: 'smooth'});
+        });
         nav.appendChild(button);
     });
 }
 
-function displayCreature(creature) {
+function displayAllCreatures(creatures) {
     const content = document.getElementById('content');
-    content.innerHTML = `
-        <h2>${creature.name}</h2>
-        <pre>${creature.ascii}</pre>
-        <h3>Anesthesia Considerations:</h3>
-        <p>${creature.info}</p>
-        <h3>Summary:</h3>
-        <table>
-            <tr>
-                <th>Creature</th>
-                <th>Anesthesia Protocol</th>
-                <th>Physiological Considerations</th>
-                <th>Special Considerations</th>
-            </tr>
-            <tr>
-                <td>${creature.summary}</td>
-            </tr>
-        </table>
-    `;
+    creatures.forEach(creature => {
+        const section = document.createElement('section');
+        section.id = creature.name;
+        section.className = 'creature-section';
+        section.innerHTML = `
+            <h2>${creature.name}</h2>
+            <pre>${creature.ascii}</pre>
+            <h3>Anesthesia Considerations:</h3>
+            <p>${creature.info}</p>
+            <h3>Summary:</h3>
+            <table>
+                <tr>
+                    <th>Creature</th>
+                    <th>Anesthesia Protocol</th>
+                    <th>Physiological Considerations</th>
+                    <th>Special Considerations</th>
+                </tr>
+                <tr>
+                    <td>${creature.summary}</td>
+                </tr>
+            </table>
+        `;
+        content.appendChild(section);
+    });
 }
