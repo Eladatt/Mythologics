@@ -1,49 +1,93 @@
-:root {
-    --primary-color: #ff7f00;
-    --text-color: #333;
-    --background-color: #f4f4f4;
-}
-
-body, html {
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
     margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    color: var(--text-color);
-    background-color: var(--background-color);
+    padding: 20px;
+    background-color: #f0f0f0;
+    color: #333;
 }
 
-#app-container {
-    display: flex;
-    height: 100vh;
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
 }
 
-#side-nav {
-    width: 250px;
-    background-color: #2c3e50;
+h2 {
+    color: #3498db;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+}
+
+h3 {
+    color: #2980b9;
+}
+
+nav {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+button {
+    margin: 5px;
+    padding: 10px 15px;
+    background-color: #3498db;
     color: white;
-    padding: 20px;
-}
-
-#nav-list {
-    list-style-type: none;
-    padding: 0;
-}
-
-#nav-list li {
-    padding: 10px;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-#content-area {
-    flex-grow: 1;
+button:hover {
+    background-color: #2980b9;
+}
+
+#content {
+    background-color: white;
     padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-#ascii-container {
-    font-family: monospace;
-    white-space: pre-wrap; /* Preserve whitespace */
+pre {
+    background-color: #ecf0f1;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+    font-size: 14px;
+    line-height: 1.2;
 }
 
-#info-container {
+table {
+    border-collapse: collapse;
+    width: 100%;
     margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #bdc3c7;
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #3498db;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+    
+    button {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+    }
 }
