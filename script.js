@@ -89,8 +89,5 @@ function updateAccordion(filename, sections) {
         sectionItem.addEventListener('click', () => displayContent([section]));
         accordionContent.appendChild(sectionItem);
     });
-    
-    accordionContent.style.display = 'block';
-}
 
 loadTextFiles();
