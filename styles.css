@@ -1,67 +1,52 @@
 body {
     font-family: 'Courier New', monospace;
-    background-color: #f0f0f0;
-    color: #333;
+    background-color: #000;
+    color: #0f0;
     margin: 0;
     padding: 0;
 }
 
-.container {
+#app {
     display: flex;
     height: 100vh;
 }
 
 #sidebar {
     width: 250px;
-    background-color: #000080;
-    color: #ffffff;
-    padding: 20px;
+    background-color: #001100;
     overflow-y: auto;
-}
-
-main {
-    flex-grow: 1;
-    padding: 20px;
-    background-color: #ffffff;
-    overflow-y: auto;
-}
-
-h2 {
-    margin-top: 0;
-    border-bottom: 2px solid #ffffff;
-    padding-bottom: 10px;
-}
-
-.accordion {
-    background-color: #000080;
-    color: #ffffff;
-    cursor: pointer;
-    padding: 10px;
-    width: 100%;
-    text-align: left;
-    border: none;
-    outline: none;
-    transition: 0.4s;
-    font-family: 'Courier New', monospace;
-}
-
-.active, .accordion:hover {
-    background-color: #0000a0;
-}
-
-.panel {
-    padding: 0 10px;
-    background-color: #000080;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.2s ease-out;
+    border-right: 2px solid #0f0;
 }
 
 #content {
-    background-color: #ffffff;
-    border: 2px solid #000080;
+    flex-grow: 1;
     padding: 20px;
-    box-shadow: 5px 5px 0px #000080;
+    overflow-y: auto;
+}
+
+.accordion-item {
+    border-bottom: 1px solid #0f0;
+}
+
+.accordion-header {
+    background-color: #001100;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.accordion-content {
+    padding: 10px;
+    display: none;
+}
+
+#ascii-art {
+    white-space: pre;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+#info-section {
+    line-height: 1.6;
 }
 
 table {
@@ -70,12 +55,11 @@ table {
 }
 
 th, td {
-    border: 1px solid #000080;
+    border: 1px solid #0f0;
     padding: 8px;
     text-align: left;
 }
 
 th {
-    background-color: #000080;
-    color: #ffffff;
+    background-color: #001100;
 }
