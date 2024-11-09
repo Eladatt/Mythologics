@@ -7,14 +7,14 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Mythical Creatures Anesthesia Guide</h1>
-    <nav id="navigation"></nav>
-    <div id="content-wrapper">
-        <div id="ascii-art"></div>
-        <div id="info-text"></div>
+    <nav id="navigation">
+        <button id="summaryButton">Summary Table</button>
+    </nav>
+    <div id="content">
+        <div id="asciiFrame"></div>
+        <div id="textFrame"></div>
     </div>
-    <button id="summary-button">View Summary Table</button>
-    <div id="summary-table" class="hidden">
+    <div id="summaryTable" style="display: none;">
         <h2>Summary Table</h2>
         <table>
             <thead>
@@ -25,9 +25,8 @@
                     <th>Special Considerations</th>
                 </tr>
             </thead>
-            <tbody id="summary-body"></tbody>
+            <tbody id="summaryTableBody"></tbody>
         </table>
-        <button id="close-summary">Close Summary</button>
     </div>
     <script src="script.js"></script>
 </body>
