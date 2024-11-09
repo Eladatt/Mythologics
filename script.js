@@ -1,17 +1,16 @@
-document.addEventListener('DOMContentLoaded', function() {
-    let creatures = [];
+let creatures = [];
 
+document.addEventListener('DOMContentLoaded', function() {
     fetch('Myth.txt')
         .then(response => response.text())
         .then(data => {
             creatures = parseCreatures(data);
             createNavigation(creatures);
             displayCreature(creatures[0]);
-            createSummaryTable(creatures);
+            populateSummaryTable(creatures);
         });
 
-    document.getElementById('summary-button').addEventListener('click', showSummaryTable);
-    document.getElementById('close-summary').addEventListener('click', hideSummaryTable);
+    document.getElementById('summaryButton').addEventListener('click', toggleSummaryTable);
 });
 
 function parseCreatures(data) {
@@ -42,33 +41,36 @@ function createNavigation(creatures) {
 }
 
 function displayCreature(creature) {
-    document.getElementById('ascii-art').textContent = creature.ascii;
-    document.getElementById('info-text').innerHTML = `
+    document.getElementById('asciiFrame').textContent = creature.ascii;
+    document.getElementById('textFrame').innerHTML = `
         <h2>${creature.name}</h2>
         <h3>Anesthesia Considerations:</h3>
         <p>${creature.info}</p>
     `;
+    document.getElementById('summaryTable').style.display = 'none';
+    document.getElementById('content').style.display = 'flex';
 }
 
-function createSummaryTable(creatures) {
-    const summaryBody = document.getElementById('summary-body');
+function populateSummaryTable(creatures) {
+    const tableBody = document.getElementById('summaryTableBody');
     creatures.forEach(creature => {
-        const row = document.createElement('tr');
-        const [name, protocol, physiology, special] = creature.summary.split('|');
-        row.innerHTML = `
-            <td>${name.trim()}</td>
-            <td>${protocol.trim()}</td>
-            <td>${physiology.trim()}</td>
-            <td>${special.trim()}</td>
-        `;
-        summaryBody.appendChild(row);
+        const row = tableBody.insertRow();
+        const summaryParts = creature.summary.split('|');
+        summaryParts.forEach(part => {
+            const cell = row.insertCell();
+            cell.textContent = part.trim();
+        });
     });
 }
 
-function showSummaryTable() {
-    document.getElementById('summary-table').classList.remove('hidden');
-}
-
-function hideSummaryTable() {
-    document.getElementById('summary-table').classList.add('hidden');
+function toggleSummaryTable() {
+    const summaryTable = document.getElementById('summaryTable');
+    const content = document.getElementById('content');
+    if (summaryTable.style.display === 'none') {
+        summaryTable.style.display = 'block';
+        content.style.display = 'none';
+    } else {
+        summaryTable.style.display = 'none';
+        content.style.display = 'flex';
+    }
 }
