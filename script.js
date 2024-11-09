@@ -1,11 +1,32 @@
 document.addEventListener('DOMContentLoaded', function() {
+    let creatures = [];
+
     fetch('Myth.txt')
         .then(response => response.text())
         .then(data => {
-            const creatures = parseCreatures(data);
+            creatures = parseCreatures(data);
             createNavigation(creatures);
-            displayAllCreatures(creatures);
+            displayCreature(creatures[0]);
+            createSummaryTable(creatures);
         });
+
+    const summaryButton = document.getElementById('summary-button');
+    const summaryModal = document.getElementById('summary-table');
+    const closeButton = document.getElementsByClassName('close')[0];
+
+    summaryButton.onclick = function() {
+        summaryModal.style.display = "block";
+    }
+
+    closeButton.onclick = function() {
+        summaryModal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == summaryModal) {
+            summaryModal.style.display = "none";
+        }
+    }
 });
 
 function parseCreatures(data) {
@@ -30,37 +51,39 @@ function createNavigation(creatures) {
     creatures.forEach(creature => {
         const button = document.createElement('button');
         button.textContent = creature.name;
-        button.addEventListener('click', () => {
-            document.getElementById(creature.name).scrollIntoView({behavior: 'smooth'});
-        });
+        button.addEventListener('click', () => displayCreature(creature));
         nav.appendChild(button);
     });
 }
 
-function displayAllCreatures(creatures) {
-    const content = document.getElementById('content');
+function displayCreature(creature) {
+    const asciiFrame = document.getElementById('ascii-frame');
+    const infoFrame = document.getElementById('info-frame');
+
+    asciiFrame.innerHTML = `<pre>${creature.ascii}</pre>`;
+    infoFrame.innerHTML = `
+        <h2>${creature.name}</h2>
+        <h3>Anesthesia Considerations:</h3>
+        <p>${creature.info}</p>
+    `;
+}
+
+function createSummaryTable(creatures) {
+    const table = document.getElementById('summary-table-content');
+    table.innerHTML = `
+        <tr>
+            <th>Creature</th>
+            <th>Anesthesia Protocol</th>
+            <th>Physiological Considerations</th>
+            <th>Special Considerations</th>
+        </tr>
+    `;
+
     creatures.forEach(creature => {
-        const section = document.createElement('section');
-        section.id = creature.name;
-        section.className = 'creature-section';
-        section.innerHTML = `
-            <h2>${creature.name}</h2>
-            <pre>${creature.ascii}</pre>
-            <h3>Anesthesia Considerations:</h3>
-            <p>${creature.info}</p>
-            <h3>Summary:</h3>
-            <table>
-                <tr>
-                    <th>Creature</th>
-                    <th>Anesthesia Protocol</th>
-                    <th>Physiological Considerations</th>
-                    <th>Special Considerations</th>
-                </tr>
-                <tr>
-                    <td>${creature.summary}</td>
-                </tr>
-            </table>
-        `;
-        content.appendChild(section);
+        const row = table.insertRow();
+        creature.summary.split('|').forEach(cell => {
+            const td = row.insertCell();
+            td.textContent = cell.trim();
+        });
     });
 }
