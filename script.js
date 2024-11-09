@@ -1,35 +1,33 @@
 let creatures = [];
 let currentCreature = 0;
 
-function loadFile() {
+function fetchData() {
     fetch('Myth.txt')
         .then(response => response.text())
         .then(data => {
             parseData(data);
-            createNavigation();
+            updateNavigation();
             displayCreature(0);
-            createSummaryTable();
         });
 }
 
 function parseData(data) {
-    const sections = data.split(/(?=\w+:\s*ascii:)/);
-    creatures = sections.map(section => {
-        const [name, ...content] = section.split('\n');
-        const asciiEnd = content.findIndex(line => line.startsWith('info:'));
+    const creatureData = data.split(/(?=ascii:)/);
+    creatures = creatureData.map(creature => {
+        const [ascii, info] = creature.split('info:');
         return {
-            name: name.split(':')[0].trim(),
-            ascii: content.slice(0, asciiEnd).join('\n'),
-            info: content.slice(asciiEnd + 1).join('\n')
+            ascii: ascii.replace('ascii:', '').trim(),
+            info: info.trim(),
+            summary: info.match(/Summary Table Row: (.+)/)[1].trim()
         };
     });
 }
 
-function createNavigation() {
+function updateNavigation() {
     const nav = document.getElementById('navigation');
     creatures.forEach((creature, index) => {
         const button = document.createElement('button');
-        button.textContent = creature.name;
+        button.textContent = `Creature ${index + 1}`;
         button.onclick = () => displayCreature(index);
         nav.appendChild(button);
     });
@@ -37,46 +35,68 @@ function createNavigation() {
 
 function displayCreature(index) {
     currentCreature = index;
-    const creature = creatures[index];
-    document.getElementById('ascii-art').textContent = creature.ascii;
-    document.getElementById('info-text').textContent = creature.info;
+    const asciiArt = document.getElementById('ascii-art');
+    const infoText = document.getElementById('info-text');
+
+    asciiArt.innerHTML = creatures[index].ascii;
+    infoText.innerHTML = creatures[index].info.replace(/Summary Table Row:.+/, '');
+
+    animateAsciiArt();
 }
 
-function createSummaryTable() {
+function animateAsciiArt() {
+    const asciiArt = document.getElementById('ascii-art');
+    const characters = asciiArt.innerText.split('');
+    asciiArt.innerHTML = characters.map(char => `<span>${char}</span>`).join('');
+
+    const spans = asciiArt.getElementsByTagName('span');
+    const colors = ['#ff00ff', '#ffa500', '#00ffff', '#39ff14'];
+
+    setInterval(() => {
+        for (let span of spans) {
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            const randomAngle = Math.random() * 10 - 5;
+            span.style.color = randomColor;
+            span.style.transform = `rotate(${randomAngle}deg)`;
+        }
+    }, 100);
+}
+
+function displaySummaryTable() {
+    const modal = document.getElementById('summary-modal');
     const table = document.getElementById('summary-table');
-    const headers = ['Creature', 'Anesthesia Protocol', 'Physiological Considerations', 'Special Considerations'];
-    
-    const headerRow = table.insertRow();
-    headers.forEach(header => {
-        const th = document.createElement('th');
-        th.textContent = header;
-        headerRow.appendChild(th);
-    });
+    table.innerHTML = `
+        <tr>
+            <th>Creature</th>
+            <th>Anesthesia</th>
+            <th>Considerations</th>
+            <th>Recovery</th>
+        </tr>
+    `;
 
     creatures.forEach(creature => {
-        const row = table.insertRow();
-        const infoLines = creature.info.split('\n');
-        const summaryLine = infoLines.find(line => line.includes('Summary Table Row:'));
-        if (summaryLine) {
-            const [, ...cells] = summaryLine.split('|');
-            cells.forEach(cell => {
-                const td = row.insertCell();
-                td.textContent = cell.trim();
-            });
-        }
+        const row = document.createElement('tr');
+        creature.summary.split('|').forEach(cell => {
+            const td = document.createElement('td');
+            td.textContent = cell.trim();
+            row.appendChild(td);
+        });
+        table.appendChild(row);
     });
+
+    modal.style.display = 'block';
 }
 
-const summaryBtn = document.getElementById('summary-btn');
-const modal = document.getElementById('summary-modal');
-const closeBtn = document.getElementsByClassName('close')[0];
+document.getElementById('summary-btn').onclick = displaySummaryTable;
 
-summaryBtn.onclick = () => modal.style.display = 'block';
-closeBtn.onclick = () => modal.style.display = 'none';
-window.onclick = (event) => {
-    if (event.target == modal) {
-        modal.style.display = 'none';
+document.querySelector('.close').onclick = function() {
+    document.getElementById('summary-modal').style.display = 'none';
+}
+
+window.onclick = function(event) {
+    if (event.target == document.getElementById('summary-modal')) {
+        document.getElementById('summary-modal').style.display = 'none';
     }
-};
+}
 
-loadFile();
+fetchData();
