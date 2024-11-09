@@ -7,14 +7,23 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>Mythical Creatures Anesthesia Guide</h1>
-        <nav id="navigation"></nav>
-    </header>
-    <main id="content"></main>
+    <nav id="navigation"></nav>
+    <main>
+        <div id="content">
+            <div id="ascii-art"></div>
+            <div id="info-text"></div>
+        </div>
+    </main>
     <footer>
-        <button id="summaryButton">View Summary Table</button>
+        <button id="summary-btn">View Summary Table</button>
     </footer>
+    <div id="summary-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Summary Table</h2>
+            <table id="summary-table"></table>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
