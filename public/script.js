@@ -28,15 +28,66 @@ async function loadFile(filename) {
 }
 
 function parseContent(content) {
-    // ... (same as before)
+    const sections = [];
+    let currentSection = {};
+    const lines = content.split('\n');
+    
+    for (const line of lines) {
+        if (line.startsWith('Title: ')) {
+            if (currentSection.title) sections.push(currentSection);
+            currentSection = { title: line.substring(7) };
+        } else if (line.startsWith('ASCII Art:')) {
+            currentSection.asciiArt = '';
+        } else if (line.startsWith('Info:')) {
+            currentSection.info = '';
+        } else if (line.startsWith('Summary:')) {
+            currentSection.summary = [];
+        } else {
+            if (currentSection.asciiArt !== undefined && !currentSection.info) {
+                currentSection.asciiArt += line + '\n';
+            } else if (currentSection.info !== undefined && !currentSection.summary) {
+                currentSection.info += line + '\n';
+            } else if (currentSection.summary) {
+                currentSection.summary.push(line.split('|').map(cell => cell.trim()));
+            }
+        }
+    }
+    
+    if (currentSection.title) sections.push(currentSection);
+    return sections;
 }
 
 function displayContent(sections) {
-    // ... (same as before)
+    if (sections.length === 0) return;
+    
+    const firstSection = sections[0];
+    asciiArt.textContent = firstSection.asciiArt || '';
+    infoSection.innerHTML = `<h2>${firstSection.title}</h2><p>${firstSection.info || ''}</p>`;
+    
+    if (firstSection.summary) {
+        const table = document.createElement('table');
+        firstSection.summary.forEach((row, index) => {
+            const tr = document.createElement('tr');
+            row.forEach(cell => {
+                const td = document.createElement(index === 0 ? 'th' : 'td');
+                td.textContent = cell;
+                tr.appendChild(td);
+            });
+            table.appendChild(tr);
+        });
+        infoSection.appendChild(table);
+    }
 }
 
 function updateAccordion(filename, sections) {
-    // ... (same as before)
-}
+    const accordionContent = fileList.querySelector(`[data-file="${filename}"] .accordion-content`);
+    accordionContent.innerHTML = '';
+    
+    sections.forEach(section => {
+        const sectionItem = document.createElement('div');
+        sectionItem.textContent = section.title;
+        sectionItem.addEventListener('click', () => displayContent([section]));
+        accordionContent.appendChild(sectionItem);
+    });
 
 loadTextFiles();
