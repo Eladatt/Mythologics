@@ -1,102 +1,73 @@
-let creatures = [];
-let currentCreature = 0;
+document.addEventListener('DOMContentLoaded', function() {
+    let creatures = [];
 
-function fetchData() {
     fetch('Myth.txt')
         .then(response => response.text())
         .then(data => {
-            parseData(data);
-            updateNavigation();
-            displayCreature(0);
+            creatures = parseData(data);
+            createNavigation(creatures);
+            displayCreature(creatures[0]);
         });
-}
 
-function parseData(data) {
-    const creatureData = data.split(/(?=ascii:)/);
-    creatures = creatureData.map(creature => {
-        const [ascii, info] = creature.split('info:');
-        return {
-            ascii: ascii.replace('ascii:', '').trim(),
-            info: info.trim(),
-            summary: info.match(/Summary Table Row: (.+)/)[1].trim()
-        };
-    });
-}
-
-function updateNavigation() {
-    const nav = document.getElementById('navigation');
-    creatures.forEach((creature, index) => {
-        const button = document.createElement('button');
-        button.textContent = `Creature ${index + 1}`;
-        button.onclick = () => displayCreature(index);
-        nav.appendChild(button);
-    });
-}
-
-function displayCreature(index) {
-    currentCreature = index;
-    const asciiArt = document.getElementById('ascii-art');
-    const infoText = document.getElementById('info-text');
-
-    asciiArt.innerHTML = creatures[index].ascii;
-    infoText.innerHTML = creatures[index].info.replace(/Summary Table Row:.+/, '');
-
-    animateAsciiArt();
-}
-
-function animateAsciiArt() {
-    const asciiArt = document.getElementById('ascii-art');
-    const characters = asciiArt.innerText.split('');
-    asciiArt.innerHTML = characters.map(char => `<span>${char}</span>`).join('');
-
-    const spans = asciiArt.getElementsByTagName('span');
-    const colors = ['#ff00ff', '#ffa500', '#00ffff', '#39ff14'];
-
-    setInterval(() => {
-        for (let span of spans) {
-            const randomColor = colors[Math.floor(Math.random() * colors.length)];
-            const randomAngle = Math.random() * 10 - 5;
-            span.style.color = randomColor;
-            span.style.transform = `rotate(${randomAngle}deg)`;
-        }
-    }, 100);
-}
-
-function displaySummaryTable() {
-    const modal = document.getElementById('summary-modal');
-    const table = document.getElementById('summary-table');
-    table.innerHTML = `
-        <tr>
-            <th>Creature</th>
-            <th>Anesthesia</th>
-            <th>Considerations</th>
-            <th>Recovery</th>
-        </tr>
-    `;
-
-    creatures.forEach(creature => {
-        const row = document.createElement('tr');
-        creature.summary.split('|').forEach(cell => {
-            const td = document.createElement('td');
-            td.textContent = cell.trim();
-            row.appendChild(td);
+    function parseData(data) {
+        const creatureData = data.split(/(?=\w+:\s*ascii:)/);
+        return creatureData.map(section => {
+            const [name, content] = section.split(':');
+            const [ascii, info] = content.split('info:');
+            return { name: name.trim(), ascii: ascii.trim(), info: info.trim() };
         });
-        table.appendChild(row);
-    });
-
-    modal.style.display = 'block';
-}
-
-document.getElementById('summary-btn').onclick = displaySummaryTable;
-
-document.querySelector('.close').onclick = function() {
-    document.getElementById('summary-modal').style.display = 'none';
-}
-
-window.onclick = function(event) {
-    if (event.target == document.getElementById('summary-modal')) {
-        document.getElementById('summary-modal').style.display = 'none';
     }
-}
 
-fetchData();
+    function createNavigation(creatures) {
+        const nav = document.getElementById('navigation');
+        creatures.forEach((creature, index) => {
+            const button = document.createElement('button');
+            button.textContent = creature.name;
+            button.addEventListener('click', () => displayCreature(creature));
+            nav.appendChild(button);
+        });
+    }
+
+    function displayCreature(creature) {
+        const content = document.getElementById('content');
+        content.innerHTML = `
+            <h2>${creature.name}</h2>
+            <div class="creature-content">
+                <pre class="ascii-art">${creature.ascii}</pre>
+                <div class="info">${creature.info}</div>
+            </div>
+        `;
+    }
+
+    document.getElementById('summaryBtn').addEventListener('click', displaySummaryTable);
+
+    function displaySummaryTable() {
+        const content = document.getElementById('content');
+        let tableHTML = `
+            <h2>Summary Table</h2>
+            <table>
+                <tr>
+                    <th>Creature</th>
+                    <th>Anesthesia Protocol</th>
+                    <th>Physiological Considerations</th>
+                    <th>Special Monitoring/Recovery</th>
+                </tr>
+        `;
+
+        creatures.forEach(creature => {
+            const summaryRow = creature.info.split('Summary Table Row:')[1].trim();
+            const [name, protocol, physiology, monitoring] = summaryRow.split('|');
+            tableHTML += `
+                <tr>
+                    <td>${name.trim()}</td>
+                    <td>${protocol.trim()}</td>
+                    <td>${physiology.trim()}</td>
+                    <td>${monitoring.trim()}</td>
+                </tr>
+            `;
+        });
+
+        tableHTML += '</table>';
+        content.innerHTML = tableHTML;
+    }
+});
