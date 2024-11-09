@@ -1,76 +1,81 @@
 body {
-    font-family: Arial, sans-serif;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-nav {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-}
-
-nav button {
-    margin: 5px;
-    padding: 10px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.creature-content {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.ascii-art {
-    flex: 1;
-    min-width: 300px;
-    white-space: pre;
-    font-family: monospace;
-    font-size: 12px;
-    line-height: 1;
+    font-family: 'Courier New', monospace;
     background-color: #f0f0f0;
-    padding: 10px;
-    border-radius: 5px;
+    color: #333;
+    margin: 0;
+    padding: 0;
 }
 
-.info {
-    flex: 2;
-    min-width: 300px;
-    padding: 0 20px;
+.container {
+    display: flex;
+    height: 100vh;
 }
 
-#summaryBtn {
-    display: block;
-    margin: 20px auto;
-    padding: 10px 20px;
-    font-size: 18px;
+#sidebar {
+    width: 250px;
+    background-color: #000080;
+    color: #ffffff;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+main {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #ffffff;
+    overflow-y: auto;
+}
+
+h2 {
+    margin-top: 0;
+    border-bottom: 2px solid #ffffff;
+    padding-bottom: 10px;
+}
+
+.accordion {
+    background-color: #000080;
+    color: #ffffff;
     cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+    font-family: 'Courier New', monospace;
+}
+
+.active, .accordion:hover {
+    background-color: #0000a0;
+}
+
+.panel {
+    padding: 0 10px;
+    background-color: #000080;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+#content {
+    background-color: #ffffff;
+    border: 2px solid #000080;
+    padding: 20px;
+    box-shadow: 5px 5px 0px #000080;
 }
 
 table {
-    width: 100%;
     border-collapse: collapse;
+    width: 100%;
 }
 
 th, td {
-    border: 1px solid #ddd;
+    border: 1px solid #000080;
     padding: 8px;
     text-align: left;
 }
 
 th {
-    background-color: #f2f2f2;
-}
-
-@media (max-width: 768px) {
-    .creature-content {
-        flex-direction: column;
-    }
-
-    .ascii-art, .info {
-        width: 100%;
-    }
+    background-color: #000080;
+    color: #ffffff;
 }
